@@ -1,8 +1,7 @@
-const { where } = require("sequelize");
 const ProductModel = require("../models/product.model");
 
-//save products to database
-const save = async (req, res, next) => {
+// Create a product
+const createProduct = async (req, res, next) => {
   try {
     const itemName = req.body.itemName;
     const description = req.body.description;
@@ -10,41 +9,40 @@ const save = async (req, res, next) => {
     const quantity = req.body.quantity;
 
     const data = await ProductModel.create({
-      itemName: itemName,
-      description: description,
-      price: price,
-      quantity: quantity,
+      itemName,
+      description,
+      price,
+      quantity,
     });
 
     res.status(201).json({
       newProduct: data,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Failed to create a new user" });
+    console.error(error);
+    res.status(500).json({ error: "Failed to create a new product" });
   }
 };
 
-//fetch all products
-const fetch = async (req, res, next) => {
+// Fetch all products
+const getAllProducts = async (req, res, next) => {
   try {
-    const product = await ProductModel.findAll();
-    res.status(200).json(product);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      err: err,
-    });
+    const products = await ProductModel.findAll();
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch products" });
   }
 };
 
-//delete product
+// Delete a product
 const deleteProduct = async (req, res, next) => {
   try {
-    const productId = req.params.id; // Use 'const' to declare userId
+    const productId = req.params.id;
+
     if (!productId) {
       return res.status(400).json({
-        error: "Id missing", // Changed 'err' to 'error'
+        error: "Product ID missing",
       });
     }
 
@@ -56,24 +54,24 @@ const deleteProduct = async (req, res, next) => {
 
     if (result === 1) {
       return res.status(200).json({
-        success: "User deleted successfully", // Changed 'succes' to 'success'
+        success: "Product deleted successfully",
       });
     } else {
       return res.status(404).json({
-        error: "User not found", // Notify if the user with the given ID was not found
+        error: "Product not found",
       });
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({
-      error: "Error in deleting",
+      error: "Error in deleting product",
     });
   }
 };
 
 const updateProduct = async (req, res, next) => {
   try {
-    const productId = req.params.id; // Get the product ID from the request parameters
+    const productId = req.params.id;
 
     if (!productId) {
       return res.status(400).json({
@@ -103,13 +101,19 @@ const updateProduct = async (req, res, next) => {
     const updatedProduct = await existingProduct.save();
 
     res.status(200).json({
-      updatedProduct: updatedProduct,
+      updatedProduct,
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({
       error: "Error in updating product",
     });
   }
 };
-module.exports = { save, fetch, deleteProduct, updateProduct };
+
+module.exports = {
+  createProduct,
+  getAllProducts,
+  deleteProduct,
+  updateProduct,
+};

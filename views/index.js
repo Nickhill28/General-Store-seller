@@ -21,7 +21,7 @@ async function saveData(event) {
   try {
     // Send a POST request to your server to save the data
     const response = await axios.post(
-      "http://localhost:4000/product/save",
+      "http://localhost:4000/products",
       formData
     );
 
@@ -99,7 +99,7 @@ async function deleteItem(itemId) {
 
   try {
     const response = await axios.delete(
-      `http://localhost:4000/product/delete/${itemId}`
+      `http://localhost:4000/products/${itemId}`
     );
     console.log("Deleted successfully:", response.data);
     window.location.reload();
@@ -110,7 +110,7 @@ async function deleteItem(itemId) {
 
 window.addEventListener("DOMContentLoaded", async () => {
   try {
-    const res = await axios.get("http://localhost:4000/product/fetch");
+    const res = await axios.get("http://localhost:4000/products");
 
     // Clear any existing items
     document.getElementById("items").innerHTML = "";
@@ -131,7 +131,7 @@ async function buyOne(itemId, itemName, description, price, quantity) {
   try {
     // Update the quantity using Axios
     const response = await axios.put(
-      `http://localhost:4000/product/update/${itemId}`,
+      `http://localhost:4000/products/${itemId}`,
       {
         itemName: itemName,
         description: description,
@@ -141,9 +141,7 @@ async function buyOne(itemId, itemName, description, price, quantity) {
     );
 
     // Reload and display the updated items
-    const itemsResponse = await axios.get(
-      "http://localhost:4000/product/fetch"
-    );
+    const itemsResponse = await axios.get("http://localhost:4000/products");
     const items = itemsResponse.data;
 
     // Clear any existing items
@@ -166,7 +164,7 @@ async function buyTow(itemId, itemName, description, price, quantity) {
 
   try {
     const response = await axios.put(
-      `http://localhost:4000/product/update/${itemId}`,
+      `http://localhost:4000/products/${itemId}`,
       {
         itemName: itemName,
         description: description,
@@ -175,9 +173,7 @@ async function buyTow(itemId, itemName, description, price, quantity) {
       }
     );
 
-    const itemsResponse = await axios.get(
-      "http://localhost:4000/product/fetch"
-    );
+    const itemsResponse = await axios.get("http://localhost:4000/products");
     const items = itemsResponse.data;
 
     // Clear any existing items
@@ -199,7 +195,7 @@ async function buyThree(itemId, itemName, description, price, quantity) {
 
   try {
     const response = await axios.put(
-      `http://localhost:4000/product/update/${itemId}`,
+      `http://localhost:4000/products/${itemId}`,
       {
         itemName: itemName,
         description: description,
@@ -208,9 +204,7 @@ async function buyThree(itemId, itemName, description, price, quantity) {
       }
     );
 
-    const itemsResponse = await axios.get(
-      "http://localhost:4000/product/fetch"
-    );
+    const itemsResponse = await axios.get("http://localhost:4000/products");
     const items = itemsResponse.data;
 
     document.getElementById("items").innerHTML = "";
@@ -250,7 +244,7 @@ async function updateItem(id, itemName, description, price, quantity) {
     try {
       // Send a PUT request to update the data
       const response = await axios.put(
-        `http://localhost:4000/product/update/${id}`,
+        `http://localhost:4000/products/${id}`,
         updatedFormData
       );
 
