@@ -40,14 +40,16 @@ function display(obj) {
   let li = document.createElement("li");
   li.className = "list-group-item";
   li.textContent =
+    obj.quantity +
+    " units of " +
     obj.itemName +
     " " +
     obj.description +
-    "  " +
+    " " +
+    "@ " +
+    "\u20B9" +
     obj.price +
-    "rs" +
-    "  " +
-    obj.quantity;
+    "/unit. ";
 
   let buyButton1 = document.createElement("button");
   buyButton1.textContent = "Buy One";

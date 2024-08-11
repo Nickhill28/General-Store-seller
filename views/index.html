@@ -10,16 +10,19 @@
     <style>
       /* Custom CSS to enhance form appearance */
       body {
-        background-color: #f5f5f5;
+        background-image: url('https://img.freepik.com/premium-photo/grocery-store_974970-581.jpghttps://img.freepik.com/premium-photo/grocery-store_974970-581.jpg');
+        background-size: cover;
+        height: 100vh;
+        margin: 0;
       }
       .container {
-        background-color: #fff;
+        background-color: skyblue;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width:fit-content;
       }
       .form-control {
-        border-radius: 4px;
+        border-radius: 8px;
         margin-bottom: 10px;
       }
       .btn-primary {
@@ -45,8 +48,7 @@
     style="height: auto"
   >
     <div class="container ">
-      <h1 class="text-center">Store Management Dashboard</h1>
-      <h3 class="text-center">Add Items</h3>
+      <h1 class="text-center"><b>General Store Seller's Dashboard</b></h1>
       <form id="addItemForm">
         <div class="row">
           <div class="col-md-6">
@@ -103,8 +105,6 @@
       </form>
       <ul id="items" class="list-group mt-3"></ul>
     </div>
-
-    <!-- Add Bootstrap JS and Popper.js scripts (required for Bootstrap) -->
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
     
